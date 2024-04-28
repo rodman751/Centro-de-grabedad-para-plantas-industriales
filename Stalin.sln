@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34701.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stalin", "Stalin\Stalin.csproj", "{4CAF50D5-AB67-41E9-9963-F33929137890}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4CAF50D5-AB67-41E9-9963-F33929137890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CAF50D5-AB67-41E9-9963-F33929137890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CAF50D5-AB67-41E9-9963-F33929137890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CAF50D5-AB67-41E9-9963-F33929137890}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D01B1BC-B920-4662-A42C-FD74F050AFD2}
+	EndGlobalSection
+EndGlobal
