@@ -73,59 +73,45 @@ namespace Stalin
         {
             // Definir los arreglos Xn y Yn
 
-            decimal inicio = -1.2761765591335013m;
-            decimal inicio2 = -78.65500410014276m;
+            decimal inicio = -1.2761765591335013M;
+            decimal inicio2 = -78.65500410014276M;
             decimal[] dab = new decimal[Xn.Length];
             decimal[] daAnterior = new decimal[Xn.Length]; // Almacenar los valores anteriores de da
-            decimal umbral = 0.001m; // Umbral para la variación pequeña
-            decimal costo = 0;
+            decimal umbral = 0.001M; // Umbral para la variación pequeña
             decimal[] costos;
+            decimal costo = 0;
             int contador = 0;
+
 
             do
             {
                 Array.Copy(dab, daAnterior, dab.Length); // Copiar los valores actuales de da a daAnterior
 
-                if (contador == 0)
-                {
-                    for (int i = 0; i < Xn.Length; i++)
-                    {
-                        dab[i] = DistanciaCalculadora.CalcularDistancia2(inicio, inicio2, Xn[i], Yn[i]);
-                    }
-                }
-                else
-                {
-                    decimal x = CoordenadaCalculadora.CalcularX(V, R, Xn, dab);
-                    decimal y = CoordenadaCalculadora.CalcularX(V, R, Yn, dab);
 
-                    for (int i = 0; i < Xn.Length; i++)
-                    {
-                        dab[i] = DistanciaCalculadora.CalcularDistancia2(x, y, Xn[i], Yn[i]);
-
-                    }
+                for (int i = 0; i < Xn.Length; i++)
+                {
+                    dab[i] = DistanciaCalculadora.CalcularDistancia2(inicio, inicio2, Xn[i], Yn[i]);
                 }
 
-                costo = ProductoCalculadora.SumaProducto(V, R, dab);
 
 
+                costo = SumaProducto(V, R, dab);
                 contador++;
 
             } while (!VariacionCalculadora.VariacionPequena(dab, daAnterior, umbral));
-            costos = ProductoCalculadora.SumaCostos(V, R, dab);
-            //Imprimir(dab, costos);    //para ver las distancias descomentar el imprimir
-            ExcelExporter.ExportarAExcel(dab, costos, "distancialocalidadantigua");
+            costos = SumaCostos(V, R, dab);
+            //imprimir(dab, costos);    //para ver las distancis descomentar el imprimir
+            //ExcelExporter.ExportarAExcel(dab, costos, "Costoviejo");
 
-            Console.WriteLine("costo viejo: " + costo);
+            Console.WriteLine("localidad antigua: " + costo);
 
-            decimal xFinal = CoordenadaCalculadora.CalcularX(V, R, Xn, dab);
-            decimal yFinal = CoordenadaCalculadora.CalcularX(V, R, Yn, dab);
+            Console.WriteLine("x: " + inicio + ", y: " + inicio2);
 
-
-            Console.WriteLine("x: " + xFinal + ", y: " + yFinal);
-
+            Console.ReadLine();
             return costos;
 
         }
+    
 
         static decimal[] SumaCostos(decimal[] V, decimal[] R, decimal[] Da)
         {
@@ -157,61 +143,61 @@ namespace Stalin
         }
 
 
-        //public static void Costo2(decimal[] Xn, decimal[] Yn, decimal[] R, decimal[] V)
-        //    {
-        //        // Definir los arreglos Xn y Yn
+        public static void Costo2(decimal[] Xn, decimal[] Yn, decimal[] R, decimal[] V)
+        {
+            // Definir los arreglos Xn y Yn
 
-        //        decimal inicio = 0;
-        //        decimal[] dab = new decimal[Xn.Length];
-        //        decimal[] daAnterior = new decimal[Xn.Length]; // Almacenar los valores anteriores de da
-        //        decimal umbral = 0.001m; // Umbral para la variación pequeña
-        //        decimal costo = 0;
-        //        decimal[] costos;
-        //        int contador = 0;
+            decimal inicio = 0;
+            decimal[] dab = new decimal[Xn.Length];
+            decimal[] daAnterior = new decimal[Xn.Length]; // Almacenar los valores anteriores de da
+            decimal umbral = 0.001m; // Umbral para la variación pequeña
+            decimal costo = 0;
+            decimal[] costos;
+            int contador = 0;
 
-        //        do
-        //        {
-        //            Array.Copy(dab, daAnterior, dab.Length); // Copiar los valores actuales de da a daAnterior
+            do
+            {
+                Array.Copy(dab, daAnterior, dab.Length); // Copiar los valores actuales de da a daAnterior
 
-        //            if (contador == 0)
-        //            {
-        //                for (int i = 0; i < Xn.Length; i++)
-        //                {
-        //                    dab[i] = CalcularDistancia2(inicio, inicio, Xn[i], Yn[i]);
-        //                }
-        //            }
-        //            else
-        //            {
-        //                decimal x = CalcularX(V, R, Xn, dab);
-        //                decimal y = CalcularX(V, R, Yn, dab);
+                if (contador == 0)
+                {
+                    for (int i = 0; i < Xn.Length; i++)
+                    {
+                        dab[i] = DistanciaCalculadora.CalcularDistancia2(inicio, inicio, Xn[i], Yn[i]);
+                    }
+                }
+                else
+                {
+                    decimal x = CoordenadaCalculadora.CalcularX(V, R, Xn, dab);
+                    decimal y = CoordenadaCalculadora.CalcularX(V, R, Yn, dab);
 
-        //                for (int i = 0; i < Xn.Length; i++)
-        //                {
-        //                    dab[i] = CalcularDistancia2(x, y, Xn[i], Yn[i]);
+                    for (int i = 0; i < Xn.Length; i++)
+                    {
+                        dab[i] = DistanciaCalculadora.CalcularDistancia2(x, y, Xn[i], Yn[i]);
 
-        //                }
-        //            }
+                    }
+                }
 
-        //            costo = SumaProducto(V, R, dab);
-
-
-        //            contador++;
-
-        //        } while (!VariacionPequena(dab, daAnterior, umbral));
-        //        costos = SumaCostos(V, R, dab);                            //ESTE EL EL IMPORTNATE
-        //        Imprimir(dab, costos);    //para ver las distancias descomentar el imprimir
-        //        ExportarAExcel(dab, costos, "Costo2 guayakill");
-
-        //        Console.WriteLine("costo2: " + costo);
-
-        //        decimal xFinal = CalcularX(V, R, Xn, dab);
-        //        decimal yFinal = CalcularX(V, R, Yn, dab);
+                costo = SumaProducto(V, R, dab);
 
 
-        //        Console.WriteLine("x: " + xFinal + ", y: " + yFinal);
+                contador++;
+
+            } while (!VariacionCalculadora.VariacionPequena(dab, daAnterior, umbral));
+            costos = SumaCostos(V, R, dab);                            //ESTE EL EL IMPORTNATE
+            //Imprimir(dab, costos);    //para ver las distancias descomentar el imprimir
+            ExcelExporter.ExportarAExcel(dab, costos, "Costo2 guayakill");
+
+            Console.WriteLine("costo2: " + costo);
+
+            decimal xFinal = CoordenadaCalculadora.CalcularX(V, R, Xn, dab);
+            decimal yFinal = CoordenadaCalculadora.CalcularX(V, R, Yn, dab);
+
+
+            Console.WriteLine("x: " + xFinal + ", y: " + yFinal);
 
 
 
-        //    }
+        }
     }
 }
